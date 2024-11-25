@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:45:16 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/11/22 14:47:09 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 14:51:11 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 56599494
+#  define BUFFER_SIZE 42
 # endif
 
 # include <fcntl.h>
@@ -25,8 +25,9 @@
 char	*get_next_line(int fd);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strcpy(char *dest, const char *src);
+char	*ft_strjoin(char *s1, char *s2);
+void	ft_update(char *str);
+void	ft_bzero(char *str);
 char	*ft_strchr(const char *s, int c);
 
 #endif
