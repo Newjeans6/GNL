@@ -36,50 +36,43 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-char	*ft_strjoin(char  *s1, char  *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*str;
-	size_t	i;
-	size_t	size;
+    size_t	len1;
+    size_t	len2;
 
-	size = 0;
-	if (!s1 && !s2)
-		return (NULL);
-	while (s2[size] != '\0' && s2[size] != '\n')
-		size++;
-	if (s2[size] == '\n')
-		size++;
-	i = 0;
-	str = malloc((size + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	while (i < size)
-	{
-		str[i] = s2[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	len1 = ft_strlen(s1);
+	len2 = 0;
+    while (s2[len2] && s2[len2] != '\n')
+        len2++;
+    if (s2[len2] == '\n')
+        len2++;
+    char	*str = malloc(len1 + len2 + 1);
+    if (!str)
+        return (NULL);
+    ft_memcpy(str, s1, len1);
+    ft_memcpy(str + len1, s2, len2);
+    str[len1 + len2] = '\0';
+    free(s1);
+    return (str);
 }
 
 void	ft_update(char *str)
 {
-	int	i;
-	int	j;
+    int	i;
+    int	j;
 
-	i = 0;
 	j = 0;
-	while (str[i] != '\0' && str[i] != '\n')
-		i++;
-	if (str[i] == '\n')
-		i++;
-	while (str[i + j] != '\0')
-	{
-		str[j] = str[i + j];
-		j++;
-	}
-	str[j] = '\0';
+	i = 0;
+    while (str[i] && str[i] != '\n')
+        i++;
+    if (str[i] == '\n')
+        i++;
+    while (str[i])
+        str[j++] = str[i++];
+    str[j] = '\0';
 }
+
 
 size_t	ft_strlen(const char *s)
 {

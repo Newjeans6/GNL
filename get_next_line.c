@@ -36,19 +36,26 @@ char	*get_next_line(int fd)
 
 	index = 1;
 	line = ft_strdup("");
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (NULL);
-	while (index >= 0 && !ft_strchr(line, '\n'))
+	while (index > 0 && !ft_strchr(line, '\n'))
 	{
 		index = read(fd, str, BUFFER_SIZE);
 		if (index == -1)
 			return (ft_bzero(str), free(line), NULL);
 		str[index] = '\0';
 		line = ft_strjoin(line, str);
+		if (!line)
+			return (NULL);
 	}
+	if (index == 0 && str[0] != '\0')
+		line = ft_strjoin(line, str);
 	ft_update(str);
+	if (line[0] == '\0')
+		return (free(line), NULL);
 	return (line);
 }
+
 
 int	main(void)
 {
