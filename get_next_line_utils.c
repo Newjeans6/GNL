@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:06:57 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/11/25 11:27:32 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 11:39:05 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,41 +38,43 @@ char	*ft_strdup(const char *s)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-    size_t	len1;
-    size_t	len2;
+	size_t	len1;
+	size_t	len2;
+	char	*str;
 
-	len1 = ft_strlen(s1);
 	len2 = 0;
-    while (s2[len2] && s2[len2] != '\n')
-        len2++;
-    if (s2[len2] == '\n')
-        len2++;
-    char	*str = malloc(len1 + len2 + 1);
-    if (!str)
-        return (NULL);
-    ft_memcpy(str, s1, len1);
-    ft_memcpy(str + len1, s2, len2);
-    str[len1 + len2] = '\0';
-    free(s1);
-    return (str);
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	while (s2[len2] != '\n' && s2[len2] != '\0')
+		len2++;
+	if (s2[len2] == '\n')
+		len2++;
+	str = malloc(len1 + len2 + 1);
+	if (!str)
+		return (NULL);
+	ft_memcpy(str, s1, len1);
+	ft_memcpy(str + len1, s2, len2);
+	str[len1 + len2] = '\0';
+	free(s1);
+	return (str);
 }
 
 void	ft_update(char *str)
 {
-    int	i;
-    int	j;
+	int	i;
+	int	j;
 
 	j = 0;
 	i = 0;
-    while (str[i] && str[i] != '\n')
-        i++;
-    if (str[i] == '\n')
-        i++;
-    while (str[i])
-        str[j++] = str[i++];
-    str[j] = '\0';
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
+		i++;
+	while (str[i])
+		str[j++] = str[i++];
+	str[j] = '\0';
 }
-
 
 size_t	ft_strlen(const char *s)
 {
@@ -84,14 +86,21 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	ft_bzero(char *str)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int	i;
+	unsigned char	*d;
+	unsigned char	*s;
+	size_t			i;
 
 	i = 0;
-	while (str[i])
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	if (d == s)
+		return (dst);
+	while (i < n)
 	{
-		str[i] = 0;
+		d[i] = s[i];
 		i++;
 	}
+	return (dst);
 }

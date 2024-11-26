@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:45:16 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/11/25 14:51:11 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 11:46:51 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 
 # endif
 
 # include <fcntl.h>
@@ -27,7 +27,8 @@ char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
 void	ft_update(char *str);
-void	ft_bzero(char *str);
 char	*ft_strchr(const char *s, int c);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	ft_bzero(void *s, size_t n);
 
 #endif

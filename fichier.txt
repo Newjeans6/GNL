@@ -1,3 +1,2 @@
-Bonjour, ceci est un exemple.
-Deuxieme ligne ici.
-Fin.
+NULL
+NULL
