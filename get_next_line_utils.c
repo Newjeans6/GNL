@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:06:57 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/11/26 11:39:05 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 13:27:55 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		len2++;
 	str = malloc(len1 + len2 + 1);
 	if (!str)
-		return (NULL);
+		return (free(s1), NULL);
 	ft_memcpy(str, s1, len1);
 	ft_memcpy(str + len1, s2, len2);
 	str[len1 + len2] = '\0';

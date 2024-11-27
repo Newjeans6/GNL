@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:47:55 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/11/26 11:45:29 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 13:26:02 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ char	*ft_strchr(const char *s, int c)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	str[BUFFER_SIZE + 1] = "\0";
+	static char	str[BUFFER_SIZE + 1] = {0};
 	int			index;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	index = 1;
 	line = ft_strdup(str);
+	if (!line)
+		return (NULL);
 	while (index > 0 && !ft_strchr(line, '\n'))
 	{
 		index = read(fd, str, BUFFER_SIZE);
@@ -68,19 +70,19 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
-{
-	int		fd;
-	char	*line;
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*line;
 
-	fd = open("fichier.txt", O_RDONLY);
-	if (fd < 0)
-		return (1);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
-}
+// 	fd = open("fichier.txt", O_RDONLY);
+// 	if (fd < 0)
+// 		return (1);
+// 	while ((line = get_next_line(fd)) != NULL)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 	}
+// 	close(fd);
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 19:45:16 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/11/26 11:46:51 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 12:24:14 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 
+#  define BUFFER_SIZE 9
 # endif
 
 # include <fcntl.h>
