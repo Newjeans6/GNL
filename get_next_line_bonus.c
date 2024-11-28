@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 19:47:55 by aviscogl          #+#    #+#             */
-/*   Updated: 2024/11/28 09:42:58 by pnaessen         ###   ########lyon.fr   */
+/*   Created: 2024/11/28 09:05:34 by pnaessen          #+#    #+#             */
+/*   Updated: 2024/11/28 13:52:53 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -45,44 +45,52 @@ char	*ft_strchr(const char *s, int c)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	str[BUFFER_SIZE + 1] = {0};
+	static char	str[OPEN_MAX][BUFFER_SIZE + 1] = {0};
 	int			index;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	index = 1;
-	line = ft_strdup(str);
+	line = ft_strdup(str[fd]);
 	if (!line)
 		return (NULL);
 	while (index > 0 && !ft_strchr(line, '\n'))
 	{
-		index = read(fd, str, BUFFER_SIZE);
+		index = read(fd, str[fd], BUFFER_SIZE);
 		if (index == -1)
-			return (ft_bzero(str, BUFFER_SIZE), free(line), NULL);
-		str[index] = '\0';
-		line = ft_strjoin(line, str);
+			return (ft_bzero(str[fd], BUFFER_SIZE), free(line), NULL);
+		str[fd][index] = '\0';
+		line = ft_strjoin(line, str[fd]);
 		if (!line)
 			return (NULL);
 	}
 	if (index == 0 && !line[0])
 		return (free(line), NULL);
-	ft_update(str);
+	ft_update(str[fd]);
 	return (line);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
+/*int main(void)
+{
+    int fd;
+    char *line;
 
-// 	fd = open("fichier.txt", O_RDONLY);
-// 	if (fd < 0)
-// 		return (1);
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+    // Ouvrir un fichier en lecture (assure-toi que le fichier existe)
+    fd = open("test.txt", O_RDONLY);
+    if (fd == -1)
+    {
+        perror("Error opening file");
+        return 1;
+    }
+
+    // Lire et afficher chaque ligne du fichier
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);  // Affiche la ligne lue
+        free(line);  // Libère la mémoire allouée pour la ligne
+    }
+
+    // Ferme le fichier
+    close(fd);
+    return 0;
+}*/
