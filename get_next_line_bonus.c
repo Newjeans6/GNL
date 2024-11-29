@@ -6,7 +6,7 @@
 /*   By: pnaessen <pnaessen@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 09:05:34 by pnaessen          #+#    #+#             */
-/*   Updated: 2024/11/28 13:52:53 by pnaessen         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 09:54:03 by pnaessen         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*get_next_line(int fd)
 	static char	str[OPEN_MAX][BUFFER_SIZE + 1] = {0};
 	int			index;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
 		return (NULL);
 	index = 1;
 	line = ft_strdup(str[fd]);
